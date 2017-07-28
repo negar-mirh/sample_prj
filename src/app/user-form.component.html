@@ -1,0 +1,72 @@
+<h1>{{title}}</h1>
+<div class="row">
+    <div class="col-md-6 well">
+        <i *ngIf="isLoading" class='fa fa-spinner fa-spin fa-3x'></i>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <fieldset>
+                <legend>
+                    User
+                </legend>
+                <div class="form-group">
+                    <label for="name" class="control-label">Name:</label>
+                    <input type="text" class="form-control" [(ngModel)]="user.name" id="name" formControlName="name" required>
+                    <div class="alert alert-danger" *ngIf="name.touched && name.errors">
+                        <div *ngIf="name.errors.required">Name is required!</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="control-label">Email</label>
+                    <input type="text" class="form-control" [(ngModel)]="user.email" id="email" formControlName="email" required>
+                    <div class="alert alert-danger" *ngIf="email.touched && email.errors">
+                        <div *ngIf="email.errors.required">Email is required!</div>
+                        <div *ngIf="email.errors.formatError">Email format is not valid!</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="control-label">phone</label>
+                    <input type="text" class="form-control" [(ngModel)]="user.phone" id="phone" formControlName="phone" required>
+                    <div class="alert alert-danger" *ngIf="phone.touched && phone.errors">
+                        <div *ngIf="phone.errors.required">phone is required!</div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset formGroupName ="address">
+                <legend>
+                    Address
+                </legend>
+                <div class="form-group">
+                    <label for="street" class="control-label">Street:</label>
+                    <input type="text" class="form-control" [(ngModel)]="user.address.street" id="street" formControlName="street" required>
+                    <div class="alert alert-danger" *ngIf="street.touched && street.errors">
+                        <div *ngIf="street.errors.required">Street is required!</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="suite" class="control-label">Suite</label>
+                    <input type="text" class="form-control"[(ngModel)]="user.address.suite" id="suite" formControlName="suite" required>
+                    <div class="alert alert-danger" *ngIf="suite.touched && suite.errors">
+                        <div *ngIf="suite.errors.required">Suite is required!</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="city" class="control-label">City</label>
+                    <input type="text" class="form-control"[(ngModel)]="user.address.city" id="city" formControlName="city" required>
+                    <div class="alert alert-danger" *ngIf="city.touched && city.errors">
+                        <div *ngIf="city.errors.required">City is required!</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="zipcode" class="control-label">ZipCode</label>
+                    <input type="text" class="form-control" [(ngModel)]="user.address.zipcode" id="zipcode" formControlName="zipcode" required>
+                    <div class="alert alert-danger" *ngIf="zipcode.touched && zipcode.errors">
+                        <div *ngIf="zipcode.errors.required">ZipCode is required!</div>
+                    </div>
+                </div>
+            </fieldset>
+            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Save</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        &nbsp;
+    </div>
+</div>

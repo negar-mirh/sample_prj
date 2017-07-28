@@ -1,0 +1,38 @@
+<h1>Posts</h1>
+<div class="row">
+    <div class="col-md-6">
+        <select class="form-control" #u (change)="reloadPosts({userId:u.value})">
+            <option value="">Select a user...</option>
+            <option value={{user.id}} *ngFor="let user of users">{{user.name}}</option>
+        </select>
+        <pagination [items]="posts" (page-­changed)="onPageChanged($event)"></pagination>
+        <spinner [visible]="postLoading"></spinner>
+        <ul class="list-group posts">
+            <li class="list-group-item" *ngFor="let post of selectedPost" [class.active]="currentPost == post" (click)="getDetails(post)">
+                {{post.title}}
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default" *ngIf="currentPost">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ currentPost.title }}</h3>
+            </div>
+            <div class="panel-body">
+                <p>{{ currentPost.body }}</p>
+                <hr>
+                <spinner [visible]="commentsLoading"></spinner>
+
+                <div class="media" *ngFor="let comment of currentPost.comments">
+                    <div class="media-left">
+                        <a href="#"><img class="media-object thumbnail" src="http://lorempixel.com/80/80/people/?random={{comment.id}}" alt=""></a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{comment.name}}</h4>
+                        {{comment.body}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
